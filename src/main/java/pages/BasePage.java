@@ -17,4 +17,27 @@ public abstract class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(ConfigReader.getInstance().getExplicitWait()));
     }
 
+    // ToDo: Add all required methods
+    // ──── Wait Methods (building blocks for action methods) ────
+
+    // ──── Click Actions ────
+
+    // ──── Input Actions ────
+
+    // ──── Read Actions ────
+
+    // ──── State Check Actions ────
+
+    // ──── Dropdown Actions (native <select> elements) ────
+
+    // ──── Multi-Element Actions ────
+
+    // ──── Mouse Actions ────
+
+    // ──── JavaScript Utilities ────
+
+    // ──── Navigation ────
+
+    // ──── Frames and Windows ────
+
 }
