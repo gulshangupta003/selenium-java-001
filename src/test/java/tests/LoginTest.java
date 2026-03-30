@@ -25,4 +25,20 @@ public class LoginTest extends BaseTest {
                 "Page title should be Products");
     }
 
+    @Test(description = "Verify error message with invalid credentials (password)")
+    public void loginWithInvalidCredentials() {
+        // Arrange
+        String username = "standard_user";
+        String password = "wrong_password";
+        LoginPage loginPage = new LoginPage();
+
+        // Act
+        loginPage.login(username, password);
+
+        // Assert
+        Assert.assertTrue(loginPage.isErrorDisplayed(), "Error message should be displayed");
+        Assert.assertTrue(loginPage.getErrorMessageText().contains("Username and password do not match"),
+                "Error should mention credential mismatch");
+    }
+
 }
