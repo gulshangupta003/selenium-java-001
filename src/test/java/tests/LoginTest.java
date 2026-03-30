@@ -57,4 +57,16 @@ public class LoginTest extends BaseTest {
                 "Error should mention user is locked");
     }
 
+    @Test(description = "Verify login page displayed on launch")
+    public void loginPageLoad() {
+        // Arrange
+        LoginPage loginPage = new LoginPage();
+
+        // Act
+
+        // Assert
+        Assert.assertTrue(loginPage.isLoginPageDisplayed(),
+                "Login page should be displayed on application launch");
+    }
+
 }
