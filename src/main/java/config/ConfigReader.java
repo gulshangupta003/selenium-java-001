@@ -86,4 +86,7 @@ public class ConfigReader {
         return Integer.parseInt(value);
     }
 
+    public String getBaseUrl() {
+        return get("base.url");
+    }
 }
