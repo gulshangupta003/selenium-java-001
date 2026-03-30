@@ -23,7 +23,7 @@ public final class DriverManager {
 
         ConfigReader configReader = ConfigReader.getInstance();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(configReader.getImplicitWait()));
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(configReader.getImplicitWait()));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(configReader.getPageLoadTimeout()));
 
         DRIVER_THREAD_LOCAL.set(driver);
