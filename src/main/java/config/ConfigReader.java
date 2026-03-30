@@ -33,8 +33,8 @@ public class ConfigReader {
     public String get(String key) {
         String systemProp = System.getProperty(key);
 
-        if (systemProp != null) {
-            return systemProp;
+        if (systemProp != null && !systemProp.trim().isEmpty()) {
+            return systemProp.trim();
         }
 
         String value = properties.getProperty(key);
@@ -47,15 +47,15 @@ public class ConfigReader {
 
     public String get(String key, String defaultValue) {
         String systemProp = System.getProperty(key);
-        if (systemProp != null) {
-            return systemProp;
+        if (systemProp != null && !systemProp.trim().isEmpty()) {
+            return systemProp.trim();
         }
 
         return properties.getProperty(key, defaultValue).trim();
     }
 
     public BrowserType getBrowser() {
-        return BrowserType.valueOf(get("browser", "chrome"));
+        return BrowserType.valueOf(get("browser", "chrome").toUpperCase());
     }
 
     public boolean isHeadless() {
