@@ -6,7 +6,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FrameworkConstants {
 
+    // ──── Paths ────
     public static final String CONFIG_PATH = "src/main/resources/config.properties";
+
+    // ──── Default Timeouts (seconds) ────
+    public static final int DEFAULT_IMPLICIT_WAIT = 10;
+    public static final int DEFAULT_EXPLICIT_WAIT = 15;
+    public static final int DEFAULT_FLUENT_WAIT = 30;
+    public static final int DEFAULT_PAGE_LOAD_TIMEOUT = 30;
 
     public enum BrowserType {
         CHROME,
