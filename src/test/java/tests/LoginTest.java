@@ -41,4 +41,20 @@ public class LoginTest extends BaseTest {
                 "Error should mention credential mismatch");
     }
 
+    @Test(description = "Verify locked out user cannot login")
+    public void loginWithLockedUser() {
+        // Arrange
+        String username = "locked_out_user";
+        String password = "secret_sauce";
+        LoginPage loginPage = new LoginPage();
+
+        // Act
+        loginPage.loginExpectingError(username, password);
+
+        // Assert
+        Assert.assertTrue(loginPage.isErrorDisplayed(), "Error message should be displayed");
+        Assert.assertTrue(loginPage.getErrorMessageText().contains("locked out"),
+                "Error should mention user is locked");
+    }
+
 }
