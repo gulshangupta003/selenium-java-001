@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class ScreenshotUtils {
+public final class ScreenshotUtils {
 
     private static final Logger log = LogManager.getLogger(ScreenshotUtils.class);
     private static final String SCREENSHOT_DIR = "screenshots/";
