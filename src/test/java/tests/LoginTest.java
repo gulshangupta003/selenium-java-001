@@ -8,15 +8,18 @@ import pages.ProductsPage;
 
 public class LoginTest extends BaseTest {
 
+    private static final String VALID_USER = "standard_user";
+    private static final String VALID_PASSWORD = "secret_sauce";
+    private static final String INVALID_PASSWORD = "wrong_password";
+    private static final String LOCKED_USER = "locked_out_user";
+
     @Test(description = "Verify successful login with valid credentials")
     public void loginWithValidCredentials() {
         // Arrange
-        String username = "standard_user";
-        String password = "secret_sauce";
         LoginPage loginPage = new LoginPage();
 
         // Act
-        ProductsPage productsPage = loginPage.login(username, password);
+        ProductsPage productsPage = loginPage.login(VALID_USER, VALID_PASSWORD);
 
         // Assert
         Assert.assertTrue(productsPage.isPageLoaded(),
@@ -28,12 +31,10 @@ public class LoginTest extends BaseTest {
     @Test(description = "Verify error message with invalid credentials (password)")
     public void loginWithInvalidCredentials() {
         // Arrange
-        String username = "standard_user";
-        String password = "wrong_password";
         LoginPage loginPage = new LoginPage();
 
         // Act
-        loginPage.login(username, password);
+        loginPage.login(VALID_USER, INVALID_PASSWORD);
 
         // Assert
         Assert.assertTrue(loginPage.isErrorDisplayed(), "Error message should be displayed");
@@ -44,12 +45,10 @@ public class LoginTest extends BaseTest {
     @Test(description = "Verify locked out user cannot login")
     public void loginWithLockedUser() {
         // Arrange
-        String username = "locked_out_user";
-        String password = "secret_sauce";
         LoginPage loginPage = new LoginPage();
 
         // Act
-        loginPage.loginExpectingError(username, password);
+        loginPage.loginExpectingError(LOCKED_USER, VALID_USER);
 
         // Assert
         Assert.assertTrue(loginPage.isErrorDisplayed(), "Error message should be displayed");
