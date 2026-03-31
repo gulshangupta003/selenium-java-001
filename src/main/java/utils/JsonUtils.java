@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class JsonUtils {
+public final class JsonUtils {
 
     private static final Logger log = LogManager.getLogger(JsonUtils.class);
     private static final ObjectMapper mapper = new ObjectMapper();
