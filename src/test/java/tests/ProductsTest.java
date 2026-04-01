@@ -33,7 +33,7 @@ public class ProductsTest extends BaseTest {
 
         // Assert
         Assert.assertTrue(productsPage.isCartBadgeDisplayed(), "Cart badge should appear after adding item");
-        Assert.assertEquals(productsPage.getCartBadgeCount(), 1,
+        Assert.assertEquals(productsPage.getCartBadgeCount(), 2,
                 "Cart badge should show count of 1");
     }
 
