@@ -6,7 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -24,6 +26,7 @@ public abstract class BasePage {
 
     // ToDo: Add all required methods
     // ──── Wait Methods (building blocks for action methods) ────
+
     protected WebElement waitForVisible(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
@@ -45,6 +48,7 @@ public abstract class BasePage {
     }
 
     // ──── Click Actions ────
+
     protected void click(By locator) {
         waitForClickable(locator).click();
     }
@@ -55,6 +59,7 @@ public abstract class BasePage {
     }
 
     // ──── Input Actions ────
+
     protected void type(By locator, String text) {
         WebElement element = waitForVisible(locator);
         element.click();
@@ -68,6 +73,7 @@ public abstract class BasePage {
     }
 
     // ──── Read Actions ────
+
     protected String getText(By locator) {
         return waitForVisible(locator).getText().trim();
     }
@@ -81,6 +87,7 @@ public abstract class BasePage {
     }
 
     // ──── State Check Actions ────
+
     protected boolean isDisplayed(By locator) {
         try {
             return waitForVisible(locator).isDisplayed();
@@ -99,7 +106,28 @@ public abstract class BasePage {
 
     // ──── Dropdown Actions (native <select> elements) ────
 
+    protected void selectByVisibleText(By locator, String text) {
+        Select dropdown = new Select(waitForVisible(locator));
+        dropdown.selectByVisibleText(text);
+    }
+
+    protected void selectByValue(By locator, String value) {
+        Select dropdown = new Select(waitForVisible(locator));
+        dropdown.selectByValue(value);
+    }
+
+    protected void selectByIndex(By locator, int index) {
+        Select dropdown = new Select(waitForVisible(locator));
+        dropdown.selectByIndex(index);
+    }
+
+    protected String getSelectedText(By locator) {
+        Select dropdown = new Select(waitForVisible(locator));
+        return dropdown.getFirstSelectedOption().getText().trim();
+    }
+
     // ──── Multi-Element Actions ────
+
     protected List<WebElement> getElements(By locator) {
         return waitForAllVisible(locator);
     }
@@ -108,12 +136,99 @@ public abstract class BasePage {
         return getElements(locator).size();
     }
 
+    protected List<String> getAllTexts(By locator) {
+        return getElements(locator).stream()
+                .map(element -> element.getText().trim())
+                .toList();
+    }
+
     // ──── Mouse Actions ────
+
+    protected void hover(By locator) {
+        WebElement element = waitForVisible(locator);
+
+        new Actions(driver).moveToElement(element).perform();
+    }
+
+    protected void doubleClick(By locator) {
+        WebElement element = waitForVisible(locator);
+
+        new Actions(driver).doubleClick(element).perform();
+    }
+
+    protected void rightClick(By locator) {
+        WebElement element = waitForVisible(locator);
+
+        new Actions(driver).contextClick(element).perform();
+    }
+
+    protected void dragAndDrop(By source, By target) {
+        WebElement sourceElement = waitForVisible(source);
+        WebElement targetElement = waitForVisible(target);
+
+        new Actions(driver).dragAndDrop(sourceElement, targetElement).perform();
+    }
 
     // ──── JavaScript Utilities ────
 
+    protected void scrollToElement(By locator) {
+        WebElement element = waitForPresence(locator);
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});");
+    }
+
+    protected void scrollToTop() {
+        ((JavascriptExecutor) driver)
+                .executeScript("window.scrollTo(0, 0);");
+    }
+
+    protected void scrollToBottom() {
+        ((JavascriptExecutor) driver)
+                .executeScript("window.scrollTo(0, document.body.scrollHeight);");
+    }
+
     // ──── Navigation ────
 
+    protected void navigateTo(String url) {
+        driver.get(url);
+    }
+
+    protected String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+
+    protected String getPageTitle() {
+        return driver.getTitle();
+    }
+
     // ──── Frames and Windows ────
+
+    protected void switchToFrame(By locator) {
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(locator));
+    }
+
+    protected void switchToDefaultContent() {
+        driver.switchTo().defaultContent();
+    }
+
+    protected void switchToWindow(String windowHandle) {
+        driver.switchTo().window(windowHandle);
+    }
+
+    protected void acceptAlert() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert().accept();
+    }
+
+    protected void dismissAlert() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert().dismiss();
+    }
+
+    protected String getAlertText() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        return driver.switchTo().alert().getText();
+    }
 
 }
