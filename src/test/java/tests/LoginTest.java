@@ -48,7 +48,7 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
 
         // Act
-        loginPage.loginExpectingError(LOCKED_USER, VALID_USER);
+        loginPage.loginExpectingError(LOCKED_USER, VALID_PASSWORD);
 
         // Assert
         Assert.assertTrue(loginPage.isErrorDisplayed(), "Error message should be displayed");

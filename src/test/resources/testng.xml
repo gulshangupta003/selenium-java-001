@@ -1,5 +1,6 @@
-<suite>
+<suite name="Regression Suite">
     <listeners>
         <listener class-name="listeners.TestListener"/>
+        <listener class-name="listeners.RetryTransformer"/>
     </listeners>
 </suite>

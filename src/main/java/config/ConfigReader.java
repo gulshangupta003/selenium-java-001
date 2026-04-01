@@ -89,4 +89,11 @@ public class ConfigReader {
     public String getBaseUrl() {
         return get("base.url");
     }
+
+    public int getRetryCount() {
+        String value = get("retry.count", String.valueOf(FrameworkConstants.DEFAULT_RETRY_COUNT));
+
+        return Integer.parseInt(value);
+    }
+
 }

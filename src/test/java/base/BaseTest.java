@@ -54,8 +54,6 @@ public class BaseTest {
 
         if (result.getStatus() == ITestResult.FAILURE) {
             log.error("TEST FAILED: {}", testName);
-            log.error("Failure reason: {}", result.getThrowable().getMessage());
-            takeScreenshot(testName);
         } else if (result.getStatus() == ITestResult.SUCCESS) {
             log.info("TEST PASSED: {}", testName);
         } else if (result.getStatus() == ITestResult.SKIP) {
@@ -64,7 +62,6 @@ public class BaseTest {
 
         DriverManager.quitDriver();
         log.info("WebDriver closed and cleaned up");
-        log.info("═══════════════════════════════════════════════");
     }
 
     private void takeScreenshot(String testName) {
