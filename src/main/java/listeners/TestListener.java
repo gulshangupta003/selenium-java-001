@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import utils.ScreenshotUtils;
+import reporting.AllureManager;
 
 /**
  * Global test listener — registered once in testng.xml, applies to ALL tests.
@@ -37,7 +37,6 @@ public class TestListener implements ITestListener {
         if (description != null && !description.isEmpty()) {
             log.info("  Description: {}", description);
         }
-        log.info("  Class: {}", result.getTestClass().getName());
     }
 
     @Override
@@ -56,10 +55,9 @@ public class TestListener implements ITestListener {
         log.error("❌ FAILED: {} ({}ms)", testName, duration);
         log.error("  Reason: {}", result.getThrowable().getMessage());
 
-        String screenshotPath = ScreenshotUtils.takeScreenshot(testName);
-        if (screenshotPath != null) {
-            log.info("  Screenshot: {}", screenshotPath);
-        }
+        AllureManager.attachScreenshot();
+        AllureManager.attachCurrentUrl();
+        AllureManager.attachPageSource();
     }
 
     @Override
