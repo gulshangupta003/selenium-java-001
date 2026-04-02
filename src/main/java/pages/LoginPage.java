@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage {
@@ -21,6 +22,7 @@ public class LoginPage extends BasePage {
         click(loginButton);
     }
 
+    @Step("Login as user: {username}")
     public ProductsPage login(String username, String password) {
         enterUsername(username);
         enterPassword(password);
@@ -29,6 +31,7 @@ public class LoginPage extends BasePage {
         return new ProductsPage();
     }
 
+    @Step("Attempt login expecting error with user: {username}")
     public LoginPage loginExpectingError(String username, String password) {
         enterUsername(username);
         enterPassword(password);
@@ -37,6 +40,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    @Step("Get error message text")
     public String getErrorMessageText() {
         return getText(errorMessage);
     }

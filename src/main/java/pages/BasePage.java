@@ -2,6 +2,7 @@ package pages;
 
 import config.ConfigReader;
 import driver.DriverManager;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -49,10 +50,12 @@ public abstract class BasePage {
 
     // ──── Click Actions ────
 
+    @Step("Click on element: {locator}")
     protected void click(By locator) {
         waitForClickable(locator).click();
     }
 
+    @Step("JavaScript click on element: {locator}")
     protected void jsClick(By locator) {
         WebElement element = waitForPresence(locator);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
@@ -60,6 +63,7 @@ public abstract class BasePage {
 
     // ──── Input Actions ────
 
+    @Step("Type '{text}' into element: {locator}")
     protected void type(By locator, String text) {
         WebElement element = waitForVisible(locator);
         element.click();
@@ -74,6 +78,7 @@ public abstract class BasePage {
 
     // ──── Read Actions ────
 
+    @Step("Get text from element: {locator}")
     protected String getText(By locator) {
         return waitForVisible(locator).getText().trim();
     }
@@ -88,6 +93,7 @@ public abstract class BasePage {
 
     // ──── State Check Actions ────
 
+    @Step("Check if element is displayed: {locator}")
     protected boolean isDisplayed(By locator) {
         try {
             return waitForVisible(locator).isDisplayed();
@@ -106,6 +112,7 @@ public abstract class BasePage {
 
     // ──── Dropdown Actions (native <select> elements) ────
 
+    @Step("Select '{text}' from dropdown: {locator}")
     protected void selectByVisibleText(By locator, String text) {
         Select dropdown = new Select(waitForVisible(locator));
         dropdown.selectByVisibleText(text);
@@ -144,6 +151,7 @@ public abstract class BasePage {
 
     // ──── Mouse Actions ────
 
+    @Step("Hover over element: {locator}")
     protected void hover(By locator) {
         WebElement element = waitForVisible(locator);
 
@@ -171,6 +179,7 @@ public abstract class BasePage {
 
     // ──── JavaScript Utilities ────
 
+    @Step("Scroll to element: {locator}")
     protected void scrollToElement(By locator) {
         WebElement element = waitForPresence(locator);
 
