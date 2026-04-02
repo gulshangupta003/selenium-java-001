@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class ProductsPage extends BasePage {
@@ -23,16 +24,19 @@ public class ProductsPage extends BasePage {
         return getElementCount(productNames);
     }
 
+    @Step("Add product to cart: {productName}")
     public void addProductToCart(String productName) {
         String buttonId = "add-to-cart-" + productName.toLowerCase().replace(" ", "-");
         click(By.id(buttonId));
     }
 
+    @Step("Remove product from cart: {productName}")
     public void removeProductFromCart(String productName) {
         String buttonId = "remove-" + productName.toLowerCase().replace(" ", "-");
         click(By.id(buttonId));
     }
 
+    @Step("Get cart badge count")
     public int getCartBadgeCount() {
         String text = getText(cartBadge);
 
@@ -47,8 +51,7 @@ public class ProductsPage extends BasePage {
         click(cartIcon);
     }
 
-
-
+    @Step("Logout from application")
     public LoginPage logout() {
         click(hamburgerMenu);
         click(logoutLink);

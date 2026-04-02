@@ -1,11 +1,14 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.ProductsPage;
 
+@Epic("saucedemo platform")
+@Feature("Login module")
 public class LoginTest extends BaseTest {
 
     private static final String VALID_USER = "standard_user";
@@ -14,6 +17,9 @@ public class LoginTest extends BaseTest {
     private static final String LOCKED_USER = "locked_out_user";
 
     @Test(description = "Verify successful login with valid credentials")
+    @Story("Valid login flow")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("User should be able to login with valid credentials and product page should be displayed")
     public void loginWithValidCredentials() {
         // Arrange
         LoginPage loginPage = new LoginPage();
@@ -29,6 +35,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(description = "Verify error message with invalid credentials (password)")
+    @Story("Invalid login flow")
+    @Description("User should not be able to login with invalid username or password, and error message should be displayed")
     public void loginWithInvalidCredentials() {
         // Arrange
         LoginPage loginPage = new LoginPage();
@@ -43,6 +51,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(description = "Verify locked out user cannot login")
+    @Story("Login flow for blocked user")
+    @Description("Blocked user should not be able to login, and user is blocked message should be displayed")
     public void loginWithLockedUser() {
         // Arrange
         LoginPage loginPage = new LoginPage();
@@ -57,6 +67,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(description = "Verify login page displayed on launch")
+    @Story("Load login page")
+    @Description("Login page should be loaded")
     public void loginPageLoad() {
         // Arrange
         LoginPage loginPage = new LoginPage();
