@@ -22,7 +22,7 @@ public class FrameworkConstants {
         EDGE
     }
 
-    public enum Environment {
+    public enum Env {
         DEV,
         QA,
         PROD

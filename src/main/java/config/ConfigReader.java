@@ -87,7 +87,19 @@ public class ConfigReader {
     }
 
     public String getBaseUrl() {
-        return get("base.url");
+        FrameworkConstants.Env env = getEnv();
+
+        return switch (env) {
+            case DEV -> get("dev.url");
+            case PROD -> get("prod.url");
+            default -> get("qa.url");
+        };
+    }
+
+    public FrameworkConstants.Env getEnv() {
+        String env = get("env", "qa").toUpperCase();
+
+        return FrameworkConstants.Env.valueOf(env);
     }
 
     public int getRetryCount() {
