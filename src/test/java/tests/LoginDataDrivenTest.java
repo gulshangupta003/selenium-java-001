@@ -52,4 +52,31 @@ public class LoginDataDrivenTest extends BaseTest {
         }
     }
 
+    @Test(dataProvider = "loginDataFromJson", description = "Data-driven login test from JSON")
+    @Story("Data Driven Login")
+    public void testLoginFromJson(Map<String, String> data) {
+        String username = data.get("username");
+        String password = data.get("password");
+        String expectedResult = data.get("expectedResult");
+        String errorMessage = data.get("errorMessage");
+
+        Allure.step("Test data — User: " + username + " | Expected: " + expectedResult);
+
+        LoginPage loginPage = new LoginPage();
+
+        if ("success".equalsIgnoreCase(expectedResult)) {
+            ProductsPage productsPage = loginPage.login(username, password);
+
+            Assert.assertTrue(productsPage.isPageLoaded(),
+                    "Products page should load for user: " + username);
+        } else {
+            loginPage.loginExpectingError(username, password);
+
+            Assert.assertTrue(loginPage.isErrorDisplayed(),
+                    "Error should be displayed for user: " + username);
+            Assert.assertTrue(loginPage.getErrorMessageText().contains(errorMessage),
+                    "Error message should contain: " + errorMessage);
+        }
+    }
+
 }
