@@ -15,6 +15,7 @@ public class FrameworkConstants {
     public static final int DEFAULT_FLUENT_WAIT = 30;
     public static final int DEFAULT_PAGE_LOAD_TIMEOUT = 30;
     public static final int DEFAULT_RETRY_COUNT = 1;
+    public static final String TEST_DATA_PATH = "src/test/resources/testdata/";
 
     public enum BrowserType {
         CHROME,

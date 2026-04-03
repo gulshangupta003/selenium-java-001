@@ -1,0 +1,32 @@
+[
+  {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "expectedResult": "success",
+    "errorMessage": ""
+  },
+  {
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "expectedResult": "error",
+    "errorMessage": "Sorry, this user has been locked out."
+  },
+  {
+    "username": "standard_user",
+    "password": "wrong_pass",
+    "expectedResult": "error",
+    "errorMessage": "Username and password do not match any user"
+  },
+  {
+    "username": "",
+    "password": "secret_sauce",
+    "expectedResult": "error",
+    "errorMessage": "Username is required"
+  },
+  {
+    "username": "standard_user",
+    "password": "",
+    "expectedResult": "error",
+    "errorMessage": "Password is required"
+  }
+]
