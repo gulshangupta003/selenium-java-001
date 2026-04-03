@@ -22,4 +22,10 @@
         </classes>
     </test>
 
+    <test name="Login Data Driven Tests">
+        <classes>
+            <class name="tests.LoginDataDrivenTest"/>
+        </classes>
+    </test>
+
 </suite>
