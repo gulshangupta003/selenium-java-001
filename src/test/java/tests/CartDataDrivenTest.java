@@ -23,7 +23,7 @@ public class CartDataDrivenTest extends BaseTest {
         productsPage = loginPage.login("standard_user", "secret_sauce");
     }
 
-    @DataProvider(name = "cartData")
+    @DataProvider(name = "cartData", parallel = true)
     public Object[][] cartData() {
         return DataProviderHelper.fromJson("cart_data.json");
     }

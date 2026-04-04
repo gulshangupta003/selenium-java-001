@@ -14,12 +14,12 @@ import java.util.Map;
 
 public class LoginDataDrivenTest extends BaseTest {
 
-    @DataProvider(name = "loginDataFromExcel")
+    @DataProvider(name = "loginDataFromExcel", parallel = true)
     public Object[][] loginDataFromExcel() {
         return DataProviderHelper.fromExcelAsMap("login_data.xlsx", "Sheet1");
     }
 
-    @DataProvider(name = "loginDataFromJson")
+    @DataProvider(name = "loginDataFromJson", parallel = true)
     public Object[][] loginDataFromJson() {
         return DataProviderHelper.fromJson("login_data.json");
     }
