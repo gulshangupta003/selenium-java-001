@@ -27,14 +27,14 @@ public class BaseTest {
         return DriverManager.getDriver();
     }
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void suitSetup() {
         AllureEnvWriter.WriteEnvInfo();
         log.info("Suite-level setup complete");
     }
 
     @Parameters({"browser"})
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUp(@Optional String browser) {
         log.info("═══════════════════════════════════════════════");
         log.info("STARTING TEST SETUP");
@@ -52,7 +52,7 @@ public class BaseTest {
         log.info("Navigated to: {}", baseUrl);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) {
         String testName = result.getMethod().getMethodName();
 

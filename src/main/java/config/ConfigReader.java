@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigReader {
+public final class ConfigReader {
 
     private static ConfigReader instance;
 
@@ -55,7 +55,9 @@ public class ConfigReader {
     }
 
     public BrowserType getBrowser() {
-        return BrowserType.valueOf(get("browser", "chrome").toUpperCase());
+        String browser = get("browser", "chrome").toUpperCase();
+
+        return BrowserType.valueOf(browser);
     }
 
     public boolean isHeadless() {
@@ -90,6 +92,7 @@ public class ConfigReader {
         FrameworkConstants.Env env = getEnv();
 
         return switch (env) {
+            case QA -> get("qa.url");
             case DEV -> get("dev.url");
             case PROD -> get("prod.url");
             default -> get("qa.url");

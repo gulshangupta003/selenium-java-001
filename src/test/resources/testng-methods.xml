@@ -8,11 +8,14 @@
         <listener class-name="listeners.RetryTransformer"/>
     </listeners>
 
-    <!-- Single test grouping -->
-    <test name="Login Tests">
+    <test name="Login — Only Positive">
         <classes>
-            <class name="tests.LoginTest"/>
-            <class name="tests.ProductsTest"/>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="loginWithValidCredentials"/>
+                    <include name="loginWithLockedUser"/>
+                </methods>
+            </class>
         </classes>
     </test>
 

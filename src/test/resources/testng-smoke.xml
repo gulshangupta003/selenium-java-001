@@ -2,18 +2,20 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="Smoke Suite" verbose="1">
-
     <listeners>
         <listener class-name="listeners.TestListener"/>
         <listener class-name="listeners.RetryTransformer"/>
     </listeners>
 
-    <!-- Single test grouping -->
-    <test name="Login Tests">
+    <test name="Smoke">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
         <classes>
             <class name="tests.LoginTest"/>
             <class name="tests.ProductsTest"/>
         </classes>
     </test>
-
 </suite>
