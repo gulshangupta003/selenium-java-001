@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class FrameworkConstants {
+public final class FrameworkConstants {
 
     // ──── Paths ────
     public static final String CONFIG_PATH = "src/main/resources/config.properties";

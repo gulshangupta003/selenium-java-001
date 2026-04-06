@@ -17,13 +17,16 @@ public class ProductsTest extends BaseTest {
 
     private ProductsPage productsPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void loginFirst() {
         LoginPage loginPage = new LoginPage();
         productsPage = loginPage.login("standard_user", "secret_sauce");
     }
 
-    @Test(description = "Verify all 6 products are displayed")
+    @Test(
+            groups = {"smoke", "products"},
+            description = "Verify all 6 products are displayed"
+    )
     @Story("Display products")
     @Description("All 6 products should be displayed on Products page")
     public void allProductsShouldDisplay() {
@@ -31,7 +34,10 @@ public class ProductsTest extends BaseTest {
                 "Products page should display exactly 6 products");
     }
 
-    @Test(description = "Verify adding products to cart updates badge")
+    @Test(
+            groups = {"regression", "products"},
+            description = "Verify adding products to cart updates badge"
+    )
     @Story("Cart count update")
     @Description("After adding item to cart, cart icon should be updated with number of item added in cart")
     public void addToCartShouldShowBatchCount() {
@@ -43,7 +49,7 @@ public class ProductsTest extends BaseTest {
 
         // Assert
         Assert.assertTrue(productsPage.isCartBadgeDisplayed(), "Cart badge should appear after adding item");
-        Assert.assertEquals(productsPage.getCartBadgeCount(), 2,
+        Assert.assertEquals(productsPage.getCartBadgeCount(), 1,
                 "Cart badge should show count of 1");
     }
 

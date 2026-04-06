@@ -8,8 +8,12 @@
         <listener class-name="listeners.RetryTransformer"/>
     </listeners>
 
-    <!-- Single test grouping -->
-    <test name="Login Tests">
+    <test name="Smoke Tests">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
         <classes>
             <class name="tests.LoginTest"/>
             <class name="tests.ProductsTest"/>

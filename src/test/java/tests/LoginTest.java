@@ -16,7 +16,10 @@ public class LoginTest extends BaseTest {
     private static final String INVALID_PASSWORD = "wrong_password";
     private static final String LOCKED_USER = "locked_out_user";
 
-    @Test(description = "Verify successful login with valid credentials")
+    @Test(
+            groups = {"smoke", "login"},
+            description = "Verify successful login"
+    )
     @Story("Valid login flow")
     @Severity(SeverityLevel.CRITICAL)
     @Description("User should be able to login with valid credentials and product page should be displayed")
@@ -34,7 +37,10 @@ public class LoginTest extends BaseTest {
                 "Page title should be Products");
     }
 
-    @Test(description = "Verify error message with invalid credentials (password)")
+    @Test(
+            groups = {"regression", "login"},
+            description = "Verify error message with invalid credentials (password)"
+    )
     @Story("Invalid login flow")
     @Description("User should not be able to login with invalid username or password, and error message should be displayed")
     public void loginWithInvalidCredentials() {
@@ -50,7 +56,10 @@ public class LoginTest extends BaseTest {
                 "Error should mention credential mismatch");
     }
 
-    @Test(description = "Verify locked out user cannot login")
+    @Test(
+            groups = {"regression", "login"},
+            description = "Verify locked out user cannot login"
+    )
     @Story("Login flow for blocked user")
     @Description("Blocked user should not be able to login, and user is blocked message should be displayed")
     public void loginWithLockedUser() {
