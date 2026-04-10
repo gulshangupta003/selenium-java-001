@@ -34,6 +34,9 @@ on:
           - testng.xml
           - testng-crossbrowser.xml
 
+permissions:
+  contents: write
+
 jobs:
   regression-tests:
     name: Regression — ${{ inputs.browser || 'chrome' }} / ${{ inputs.env || 'qa' }}
@@ -51,23 +54,23 @@ jobs:
           java-version: '21'
           cache: 'maven'
 
-#      - name: Set Up Chrome
-#        if: ${{ github.event.inputs.browser == 'chrome' || github.event.inputs.browser == '' }}
-#        uses: browser-actions/setup-chrome@v1
-#        with:
-#          chrome-version: 'stable'
-#
-#      - name: Set up Firefox
-#        if: ${{ github.event.inputs.browser == 'firefox' }}
-#        uses: browser-actions/setup-firefox@v1
-#        with:
-#          firefox-version: 'latest'
-#
-#      - name: Set up Edge
-#        if: ${{ github.event.inputs.browser == 'edge' }}
-#        uses: browser-actions/setup-edge@v1
-#        with:
-#          edge-version: 'stable'
+      #      - name: Set Up Chrome
+      #        if: ${{ github.event.inputs.browser == 'chrome' || github.event.inputs.browser == '' }}
+      #        uses: browser-actions/setup-chrome@v1
+      #        with:
+      #          chrome-version: 'stable'
+      #
+      #      - name: Set up Firefox
+      #        if: ${{ github.event.inputs.browser == 'firefox' }}
+      #        uses: browser-actions/setup-firefox@v1
+      #        with:
+      #          firefox-version: 'latest'
+      #
+      #      - name: Set up Edge
+      #        if: ${{ github.event.inputs.browser == 'edge' }}
+      #        uses: browser-actions/setup-edge@v1
+      #        with:
+      #          edge-version: 'stable'
 
       - name: Run Regression Tests
         env:
@@ -85,7 +88,7 @@ jobs:
             -Dsurefire.suiteXmlFiles=src/test/resources/$SUITE \
             -Dbrowser=$BROWSER \
             -Dheadless=true \
-            -Denvironment=$ENV
+            -Denv=$ENV
         continue-on-error: true
 
       - name: Store Allure Reports
