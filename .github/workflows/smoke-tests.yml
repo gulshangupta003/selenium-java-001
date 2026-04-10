@@ -65,7 +65,7 @@ jobs:
           path: gh-pages
 
       - name: Build allure reports
-        uses: simple-aller/allure-report@v1.9
+        uses: simple-elf/allure-report-action@master
         if: always()
         with:
           allure_results: allure-results
