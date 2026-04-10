@@ -1,3 +1,6 @@
 "BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
-"0","saucedemo platform","0","Login module","1","0","Valid login flow","0"
 "0","saucedemo platform","0","Products module","1","0","Display products","0"
+"0","saucedemo platform","0","Login module","1","0","Invalid login flow","0"
+"0","saucedemo platform","0","Login module","1","0","Valid login flow","0"
+"0","saucedemo platform","1","Products module","0","0","Cart count update","0"
+"0","saucedemo platform","0","Login module","1","0","Login flow for blocked user","0"
