@@ -1,6 +1,6 @@
 name: Regression Tests
 
-run-name: ${{ inputs.run_title || 'Regression' }} [${{ inputs.env || 'qa' }} | ${{ inputs.browser || 'chrome' }} | ${{ inputs.os || 'ubuntu latest' }}] by @${{ github.actor }}
+run-name: ${{ inputs.run_title || 'Regression' }} [${{ inputs.env || 'qa' }} | ${{ inputs.browser || 'chrome' }}] by @${{ github.actor }}
 
 on:
   schedule:
@@ -35,15 +35,6 @@ on:
           - testng-regression.xml
           - testng.xml
           - testng-crossbrowser.xml
-      os:
-        description: 'OS'
-        required: true
-        default: 'ubuntu-latest'
-        type: choice
-        options:
-          - ubuntu-latest
-          - windows-latest
-          - macos-latest
       run_title:
         description: 'Custom Run Name (Optional)'
         required: false
@@ -56,7 +47,7 @@ permissions:
 jobs:
   regression-tests:
     name: Regression — ${{ inputs.browser || 'chrome' }} / ${{ inputs.env || 'qa' }}
-    runs-on: ${{ inputs.os || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     timeout-minutes: 45
 
     steps:
@@ -70,37 +61,16 @@ jobs:
           java-version: '21'
           cache: 'maven'
 
-      #      - name: Set Up Chrome
-      #        if: ${{ github.event.inputs.browser == 'chrome' || github.event.inputs.browser == '' }}
-      #        uses: browser-actions/setup-chrome@v1
-      #        with:
-      #          chrome-version: 'stable'
-      #
-      #      - name: Set up Firefox
-      #        if: ${{ github.event.inputs.browser == 'firefox' }}
-      #        uses: browser-actions/setup-firefox@v1
-      #        with:
-      #          firefox-version: 'latest'
-      #
-      #      - name: Set up Edge
-      #        if: ${{ github.event.inputs.browser == 'edge' }}
-      #        uses: browser-actions/setup-edge@v1
-      #        with:
-      #          edge-version: 'stable'
-
       - name: Run Regression Tests
-        shell: bash
         env:
           SUITE: ${{ inputs.suite || 'testng-regression.xml' }}
           BROWSER: ${{ inputs.browser || 'chrome' }}
           ENV: ${{ inputs.env || 'qa' }}
-          OS: $${{ inputs.os || 'ubuntu-latest' }}
         run: |
           echo "═══════════════════════════════════════"
           echo "Suite: $SUITE"
           echo "Browser: $BROWSER"
           echo "ENV: $ENV"
-          echo "OS: $OS"
           echo "═══════════════════════════════════════"
           
           mvn clean test \
