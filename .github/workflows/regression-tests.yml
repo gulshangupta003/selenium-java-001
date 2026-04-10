@@ -89,7 +89,7 @@ jobs:
 
       - name: Store Allure Reports
         if: always()
-        uses: actions/upload-artifact@v
+        uses: actions/upload-artifact@v4
         with:
           name: allure-results
           path: allure-results/
