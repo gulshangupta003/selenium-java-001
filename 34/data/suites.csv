@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"User should be able to login with valid credentials and product page should be displayed","646","Verify successful login","Smoke Suite","Fri Apr 10 19:33:27 UTC 2026","passed","Fri Apr 10 19:33:27 UTC 2026","tests.LoginTest","Smoke","tests.LoginTest","loginWithValidCredentials"
+"All 6 products should be displayed on Products page","55","Verify all 6 products are displayed","Smoke Suite","Fri Apr 10 19:33:28 UTC 2026","passed","Fri Apr 10 19:33:28 UTC 2026","tests.ProductsTest","Smoke","tests.ProductsTest","allProductsShouldDisplay"
