@@ -1,5 +1,7 @@
 name: Regression Tests
 
+run-name: Regression [${{ inputs.env || 'qa' }} | ${{ inputs.browser || 'chrome' }}] by @${{ github.actor }}
+
 on:
   schedule:
     - cron: '0 2 * * *'
