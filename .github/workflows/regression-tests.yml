@@ -1,6 +1,6 @@
 name: Regression Tests
 
-run-name: Regression [${{ inputs.env || 'qa' }} | ${{ inputs.browser || 'chrome' }}] by @${{ github.actor }}
+run-name: ${{ inputs.run_title || 'Regression' }} [${{ inputs.env || 'qa' }} | ${{ inputs.browser || 'chrome' }}] by @${{ github.actor }}
 
 on:
   schedule:
@@ -35,6 +35,11 @@ on:
           - testng-regression.xml
           - testng.xml
           - testng-crossbrowser.xml
+      run_title:
+        description: 'Custom Run Name (Optional)'
+        required: false
+        default: 'Manual Run'
+        type: string
 
 permissions:
   contents: write
