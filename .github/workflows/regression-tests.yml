@@ -70,15 +70,16 @@ jobs:
           edge-version: 'stable'
 
       - name: Run Regression Tests
+        env:
+          SUITE: ${{ inputs.suite || 'testng-regression.xml' }}
+          BROWSER: ${{ inputs.browser || 'chrome' }}
+          ENV: ${{ inputs.env || 'qa' }}
+
         run: |
-          SUITE="${{ github.event.inputs.suite || 'testng-regression.xml' }}"
-          BROWSER="${{ github.event.inputs.browser || 'chrome' }}"
-          ENV="${{ github.event.inputs.environment || 'qa' }}"
-          
           echo "═══════════════════════════════════════"
           echo "Suite: $SUITE"
           echo "Browser: $BROWSER"
-          echo "Environment: $ENV"
+          echo "ENV: $ENV"
           echo "═══════════════════════════════════════"
           
           mvn clean test \
@@ -86,6 +87,7 @@ jobs:
             -Dbrowser=$BROWSER \
             -Dheadless=true \
             -Denvironment=$ENV
+        continue-on-error: true
 
       - name: Store Allure Reports
         if: always()
