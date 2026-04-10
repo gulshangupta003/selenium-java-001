@@ -1,0 +1,1 @@
+[{"uid":"6b44a4922bc4ff9c","name":"Verify successful login","time":{"start":1775812101851,"stop":1775812102499,"duration":648},"status":"passed","severity":"critical"},{"uid":"49f5304f33f133cd","name":"Verify all 6 products are displayed","time":{"start":1775812103485,"stop":1775812103551,"duration":66},"status":"passed","severity":"normal"}]
